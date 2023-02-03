@@ -1,13 +1,16 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
 <h1>{{question.subject}}</h1>
 <div>
     {{question.content}}
 </div>
 
-<h5>{{ question.answer_set.count}}개의 답변이 있습니다.</h5>
+<h5>{{ question.answer_set.count }}개의 답변이 있습니다.</h5>
 <div>
     <ul>
     {% for answer in question.answer_set.all %}
-        <li> {{answer.content}}</li>
+        <li> {{answer.content}} </li>
     {% endfor %}
     </ul>
 </div>
