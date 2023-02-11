@@ -36,8 +36,10 @@ def baseHTML(article, id=None):
         <h1><a href="/sju/">나는 무슨 수업을 들었나</a></h1>
         <ul>
             {ol}
+        </ul>
         <ul>
             {article}
+        </ul>
         <ul>
             <li><a href="/sju/create/">create</a></li>
             {contextUI}

@@ -21,11 +21,13 @@ def detail(request, question_id):
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    
     if request.method=='POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save(commit=False)
             answer.create_date = timezone.now()
+            answer.question = question
             answer.save()
             return redirect('pybo:detail', question_id=question.id)
     else:
