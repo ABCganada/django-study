@@ -10,5 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('polls/', include('polls.urls')),
-    path('common/', include('common.urls')),
+    path('common/', include('common.urls'))
 ]
