@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from .models import Semester
 
@@ -78,7 +78,7 @@ def create(request):
         return redirect(url)
 
 def read(request, sem_id):
-    sem = Semester.objects.get(id=sem_id)
+    sem = get_object_or_404(Semester, pk=sem_id)
     context = {'sem': sem}
     return render(request, 'sju/semester_read.html', context)
     
