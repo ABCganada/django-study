@@ -1,0 +1,9 @@
+{% if semester_list %}
+    <ul>
+        {% for sem in semester_list %}
+        <li><a href="/sju/read/{{sem.id}}/">{{sem.table}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>학교를 아직 안 다녔나보군요?</p>
+{% endif %}

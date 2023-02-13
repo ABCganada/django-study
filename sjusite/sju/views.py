@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from .models import Semester
 
 semesters =[
     {'id': 1, 'title': '2018-1(1-1)', 'body': '1학년 1학기는 ...'},
@@ -49,11 +50,9 @@ def baseHTML(article, id=None):
     '''
 
 def index(request):
-    article = '''
-        <h2>잘 하자...</h2>
-        18학점 남았다 !
-    '''
-    return HttpResponse(baseHTML(article))
+    semester_list= Semester.objects.order_by('-table')
+    context = {'semester_list': semester_list}
+    return render(request, 'sju/semester_list.html', context)
 
 @csrf_exempt
 def create(request):
@@ -78,15 +77,20 @@ def create(request):
         nextID = nextID + 1
         return redirect(url)
 
-def read(request, id):
-    global semesters
-    article = ''
-    for semester in semesters:
-        if semester['id'] == int(id):
-            article = f'<h2>{semester["title"]}</h2>{semester["body"]}'
-            break
+def read(request, sem_id):
+    sem = Semester.objects.get(id=sem_id)
+    context = {'sem': sem}
+    return render(request, 'sju/semester_read.html', context)
+    
+    
+    # global semesters
+    # article = ''
+    # for semester in semesters:
+    #     if semester['id'] == int(id):
+    #         article = f'<h2>{semester["title"]}</h2>{semester["body"]}'
+    #         break
         
-    return HttpResponse(baseHTML(article, id))
+    # return HttpResponse(baseHTML(article, id))
 
 @csrf_exempt
 def update(request, id):
