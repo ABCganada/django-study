@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-from .models import Semester
+from .models import Semester, Subjects
 
 semesters =[
     {'id': 1, 'title': '2018-1(1-1)', 'body': '1학년 1학기는 ...'},
@@ -53,6 +54,12 @@ def index(request):
     semester_list= Semester.objects.order_by('-table')
     context = {'semester_list': semester_list}
     return render(request, 'sju/semester_list.html', context)
+
+def subject_create(request, sem_id):
+    semester = get_object_or_404(Semester, pk=sem_id)
+    subject = Subjects(semester=semester, content=request.POST.get('content'), create_at=timezone.now())
+    subject.save()
+    return redirect('sju:read', sem_id=semester.id)
 
 @csrf_exempt
 def create(request):

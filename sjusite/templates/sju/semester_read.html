@@ -5,3 +5,16 @@
 <div>
     평점: {{sem.grade}}
 </div>
+<h5>{{sem.subjects_set.count}}개의 과목을 들었습니다.</h5>
+<div>
+    <ul>
+        {% for sub in sem.subjects_set.all %}
+        <li>{{ sub.content }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<form action="{% url 'sju:subject_create' sem.id %}" method="post">
+{% csrf_token %}
+<textarea name="content" id="content" rows="15"></textarea>
+<input type="submit" value="이수 과목 등록">
+</form>

@@ -1,7 +1,7 @@
 {% if semester_list %}
     <ul>
         {% for sem in semester_list %}
-        <li><a href="/sju/read/{{sem.id}}/">{{sem.table}}</a></li>
+        <li><a href="{% url 'sju:read' sem.id %}">{{sem.table}}</a></li>
         {% endfor %}
     </ul>
 {% else %}
