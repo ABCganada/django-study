@@ -7,7 +7,8 @@
     <title>나는 무슨 수업을 들었는가?</title>
 </head>
 <body>
-    <h1><a href="{% url 'sju:index' %}">나는 무슨 수업을 들었는가</a></h1>
+    {% include 'navbar.html'%}
+
     {% block content %}
     {% endblock %}
 </body>
