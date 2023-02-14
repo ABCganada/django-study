@@ -1,6 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>{{sem.table}}</h1>
 <div>
-    이수학점: {{sem.credit}}
+    이수학점: {{sem.credits}}
 </div>
 <div>
     평점: {{sem.grade}}
@@ -9,12 +11,17 @@
 <div>
     <ul>
         {% for sub in sem.subjects_set.all %}
-        <li>{{ sub.content }}</li>
+        <li>
+            {{ sub.name }}
+            {{sub.credit}}학점
+        </li>
         {% endfor %}
     </ul>
 </div>
 <form action="{% url 'sju:subject_create' sem.id %}" method="post">
 {% csrf_token %}
-<textarea name="content" id="content" rows="15"></textarea>
-<input type="submit" value="이수 과목 등록">
+<p><input type="text" name="name" placeholder="Subject Name"></p>
+<p><input type="text" name="credit" placeholder="Credit"></p>
+<p><input type="submit" value="이수 과목 등록"></p>
 </form>
+{% endblock %}

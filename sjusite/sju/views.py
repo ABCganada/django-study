@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.http import HttpResponseNotAllowed
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from .models import Semester, Subjects
+from .forms import SemesterForm, SubjectsForm
 
 semesters =[
     {'id': 1, 'title': '2018-1(1-1)', 'body': '1학년 1학기는 ...'},
@@ -55,11 +57,34 @@ def index(request):
     context = {'semester_list': semester_list}
     return render(request, 'sju/semester_list.html', context)
 
+def semester_create(request):
+    if request.method == 'POST':
+        form = SemesterForm(request.POST)
+        if form.is_valid():
+            semester = form.save(commit=False)
+            semester.create_at = timezone.now()
+            semester.save()
+            return redirect('sju:index')
+    else:
+        form = SemesterForm()
+    context = {'form': form}
+    return render(request, 'sju/semester_form.html', context)
+
 def subject_create(request, sem_id):
     semester = get_object_or_404(Semester, pk=sem_id)
-    subject = Subjects(semester=semester, content=request.POST.get('content'), create_at=timezone.now())
-    subject.save()
-    return redirect('sju:read', sem_id=semester.id)
+    
+    if request.method == "POST":
+        form = SubjectsForm(request.POST)
+        if form.is_valid():
+            subjects = form.save(commit=False)
+            subjects.create_at = timezone.now()
+            subjects.semester = semester
+            subjects.save()
+            return redirect('sju:read', sem_id=semester.id)
+    else:
+        return HttpResponseNotAllowed('Only POST is possible.')
+    context = {'semester': semester, 'form':form}
+    return redirect(request, 'sju/semester_read.html', context)
 
 @csrf_exempt
 def create(request):

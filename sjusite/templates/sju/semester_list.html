@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% if semester_list %}
     <ul>
         {% for sem in semester_list %}
@@ -7,3 +9,5 @@
 {% else %}
     <p>학교를 아직 안 다녔나보군요?</p>
 {% endif %}
+<a href="{% url 'sju:semester_create' %}" class="btn btn-primary">학기 추가등록</a>
+{% endblock %}
