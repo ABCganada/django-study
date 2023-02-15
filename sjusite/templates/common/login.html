@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <form action="{% url 'common:login' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="username">사용자ID</label>
+            <input type="text" name="username" id="username"
+                    value="{{form.username.value|default_if_none:''}}">
+        </div>
+        <div>
+            <label for="password">비밀번호</label>
+            <input type="text" name="password" id="password"
+                    value="{{form.password.value|default_if_none:''}}">
+        </div>
+        <button type="submit">로그인</button>
+    </form>
+</div>
+{% endblock %}

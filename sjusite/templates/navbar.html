@@ -1,6 +1,12 @@
 <h1><a href="{% url 'sju:index' %}">나는 무슨 수업을 들었는가</a></h1>
 <div>
     <ul>
-        <li><a href="#">로그인</a></li>
+        <li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+        {% else %}
+        <a href="{% url 'common:login' %}">로그인</a>
+        {% endif %}
+        </li>
     </ul>
 </div>
