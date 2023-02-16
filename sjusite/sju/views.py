@@ -53,7 +53,7 @@ def baseHTML(article, id=None):
     '''
 
 def index(request):
-    semester_list= Semester.objects.order_by('-table')
+    semester_list= Semester.objects.order_by('table')
     context = {'semester_list': semester_list}
     return render(request, 'sju/semester_list.html', context)
 
