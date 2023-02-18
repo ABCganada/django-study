@@ -17,6 +17,7 @@
         <li>
             {{ sub.name }} ({{sub.credit}}학점)
             <a href="{% url 'sju:subject_update' sub.id %}">과목 수정</a>
+            <a href="{% url 'sju:subject_delete' sub.id %}">삭제</a>
         </li>
         {% endfor %}
     </ul>

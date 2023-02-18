@@ -8,7 +8,6 @@ app_name = 'sju'
 urlpatterns = [
     path('', views.index, name='index'),
     
-    path('create/', views.create, name='create'),
     path('semester/create/', views.semester_create, name="semester_create"),
     path('subject/create/<int:sem_id>', views.subject_create, name='subject_create'),
     
@@ -17,5 +16,6 @@ urlpatterns = [
     path('semester/update/<int:sem_id>/', views.semester_update, name='semester_update'),
     path('subject/update/<int:sem_id>/', views.subject_update, name='subject_update'),
     
-    path('delete/', views.delete, name='delete'),
+    path('semester/delete/<int:sem_id>/', views.semester_delete, name='semester_delete'),
+    path('subject/delete/<int:sem_id>', views.subject_delete, name='subject_delete'),
 ]

@@ -3,7 +3,10 @@
 {% if semester_list %}
     <ul>
         {% for sem in semester_list %}
-        <li><a href="{% url 'sju:read' sem.id %}">{{sem.table}}</a></li>
+        <li>
+            <a href="{% url 'sju:read' sem.id %}">{{sem.table}}</a>
+            <a href="{% url 'sju:semester_delete' sem.id %}">삭제</a>
+        </li>
         {% endfor %}
     </ul>
 {% else %}
