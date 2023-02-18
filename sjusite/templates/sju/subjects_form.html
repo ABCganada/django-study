@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    <h5>학기 등록</h5>
+    <h5>과목 등록</h5>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <p><button type="submit" class="btn btn-primary">등록하기</button></p>
+        <p><input type="submit" value="등록하기"></p>
     </form>
 </div>
 {% endblock %}

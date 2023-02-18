@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{sem.table}}</h1>
+<h2>{{sem.table}}</h2>
 <div>
     이수학점: {{sem.credits}}
 </div>
 <div>
     평점: {{sem.grade}}
 </div>
+<div>
+    <a href="{% url 'sju:semester_update' sem.id %}">수정</a>
+</div>
 <h5>{{sem.subjects_set.count}}개의 과목을 들었습니다.</h5>
 <div>
     <ul>
         {% for sub in sem.subjects_set.all %}
         <li>
-            {{ sub.name }}
-            {{sub.credit}}학점
+            {{ sub.name }} ({{sub.credit}}학점)
+            <a href="{% url 'sju:subject_update' sub.id %}">과목 수정</a>
         </li>
         {% endfor %}
     </ul>
 </div>
-<form action="{% url 'sju:subject_create' sem.id %}" method="post">
-{% csrf_token %}
-<p><input type="text" name="name" placeholder="Subject Name"></p>
-<p><input type="text" name="credit" placeholder="Credit"></p>
-<p><input type="submit" value="이수 과목 등록"></p>
-</form>
+
+<div>
+    <a href="{% url 'sju:subject_create' sem.id %}">과목 등록</a>
+</div>
 {% endblock %}

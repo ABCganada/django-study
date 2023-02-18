@@ -22,5 +22,5 @@ class SubjectsForm(forms.ModelForm):
         fields = ['name', 'credit']
         labels = {
             'name': '과목 이름',
-            'credit': '학점',
+            'credit': '이수 학점',
         }
