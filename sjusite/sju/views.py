@@ -55,7 +55,7 @@ def baseHTML(article, id=None):
 def index(request):
     semester_list= Semester.objects.order_by('table')
     context = {'semester_list': semester_list}
-    return render(request, 'sju/semester_list.html', context)
+    return render(request, 'sju/main_page.html', context)
 
 def semester_create(request):
     if request.method == 'POST':
