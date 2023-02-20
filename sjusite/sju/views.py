@@ -75,8 +75,8 @@ def semester_update(request, sem_id):
     context = {'form': form}
     return render(request, 'sju/semester_form.html', context)
 
-def subject_update(request, sem_id):
-    sub = get_object_or_404(Subjects, pk=sem_id)
+def subject_update(request, sub_id):
+    sub = get_object_or_404(Subjects, pk=sub_id)
     
     if request.method == "POST":
         form = SubjectsForm(request.POST, instance=sub)
@@ -96,8 +96,8 @@ def semester_delete(request, sem_id):
     sem.delete()
     return redirect('sju:index')
 
-def subject_delete(request, sem_id):
-    sub = get_object_or_404(Subjects, pk=sem_id)
+def subject_delete(request, sub_id):
+    sub = get_object_or_404(Subjects, pk=sub_id)
     
     sub.delete()
     return redirect('sju:read', sem_id=sub.semester.id)

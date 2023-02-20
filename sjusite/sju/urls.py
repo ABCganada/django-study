@@ -14,8 +14,8 @@ urlpatterns = [
     path('read/<int:sem_id>/', views.read, name='read'),
     
     path('semester/update/<int:sem_id>/', views.semester_update, name='semester_update'),
-    path('subject/update/<int:sem_id>/', views.subject_update, name='subject_update'),
+    path('subject/update/<int:sub_id>/', views.subject_update, name='subject_update'),
     
     path('semester/delete/<int:sem_id>/', views.semester_delete, name='semester_delete'),
-    path('subject/delete/<int:sem_id>', views.subject_delete, name='subject_delete'),
+    path('subject/delete/<int:sub_id>', views.subject_delete, name='subject_delete'),
 ]
