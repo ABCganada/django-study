@@ -4,7 +4,7 @@ from django.db.models import Q
 from ..models import Question
 import logging
 
-logger = logging.getLogger('pybo')
+logger = logging.getLogger(__name__)
 
 def index(request):
     logger.info("INFO 레벨로 출력")
